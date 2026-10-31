@@ -63,8 +63,25 @@
 
       <section class="featured-section" id="featured" aria-labelledby="featured-title">
         <div class="section-heading">
-          <h2 id="featured-title">Featured Books</h2>
-          <button class="clear-filter" id="clear-filter" type="button" hidden>Show all books</button>
+          <div class="section-heading-copy">
+            <h2 id="featured-title">Featured Books</h2>
+            <p>Explore our collection of amazing books.</p>
+          </div>
+          <div class="section-heading-actions">
+            <button class="clear-filter" id="clear-filter" type="button" hidden>Show all books</button>
+            <label class="category-filter">
+              <span class="visually-hidden">Filter by category</span>
+              <select id="category-filter">
+                <option value="">All Categories</option>
+                <option value="Fiction">Fiction</option>
+                <option value="Fantasy">Fantasy</option>
+                <option value="Productivity">Productivity</option>
+                <option value="Programming">Programming</option>
+                <option value="Science Fiction">Science Fiction</option>
+                <option value="Self Help">Self Help</option>
+              </select>
+            </label>
+          </div>
         </div>
         <div class="book-grid" id="book-grid" aria-live="polite"></div>
         <div class="empty-state" id="empty-state" hidden>

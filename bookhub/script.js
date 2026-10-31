@@ -6,7 +6,7 @@ const books = [
     category: "Programming",
     cover: "./images/clean_code_cover.png",
     rating: 4.8,
-    reviews: 2841,
+    reviews: 124,
     description:
       "A handbook of agile software craftsmanship, with practical advice for writing code that is easier to understand, improve, and maintain.",
   },
@@ -16,8 +16,8 @@ const books = [
     author: "James Clear",
     category: "Self Help",
     cover: "./images/atomic_habits_cover.png",
-    rating: 4.7,
-    reviews: 6923,
+    rating: 4.8,
+    reviews: 98,
     description:
       "A practical guide to building good habits, breaking bad ones, and making small changes that lead to remarkable results.",
   },
@@ -27,8 +27,8 @@ const books = [
     author: "Andy Weir",
     category: "Science Fiction",
     cover: "./images/the_martian_cover.png",
-    rating: 4.6,
-    reviews: 4187,
+    rating: 4.7,
+    reviews: 156,
     description:
       "An astronaut stranded on Mars must draw on his ingenuity, engineering skills, and determination to survive.",
   },
@@ -38,8 +38,8 @@ const books = [
     author: "Frank Herbert",
     category: "Fantasy",
     cover: "./images/dune_cover.png",
-    rating: 4.5,
-    reviews: 3572,
+    rating: 4.6,
+    reviews: 210,
     description:
       "On the desert planet Arrakis, Paul Atreides is swept into a sweeping story of power, destiny, and survival.",
   },
@@ -49,8 +49,8 @@ const books = [
     author: "Robin Sharma",
     category: "Productivity",
     cover: "./images/the_5am_club_cover.png",
-    rating: 4.3,
-    reviews: 1964,
+    rating: 4.5,
+    reviews: 87,
     description:
       "A story-led guide to building a morning routine that helps you focus, grow, and make the most of every day.",
   },
@@ -58,6 +58,7 @@ const books = [
 
 const bookGrid = document.querySelector("#book-grid")
 const searchInput = document.querySelector("#book-search")
+const categoryFilter = document.querySelector("#category-filter")
 const emptyState = document.querySelector("#empty-state")
 const clearFilterButton = document.querySelector("#clear-filter")
 const addBookBackdrop = document.querySelector("#add-book-backdrop")
@@ -126,6 +127,11 @@ function renderBooks() {
             <h3 title="${escapeHtml(book.title)}">${escapeHtml(book.title)}</h3>
             <p class="book-author" title="${escapeHtml(book.author)}">${escapeHtml(book.author)}</p>
             <button class="category-link" type="button" data-category="${escapeHtml(book.category)}">${escapeHtml(book.category)}</button>
+            <div class="book-rating" aria-label="${book.reviews ? `${book.rating.toFixed(1)} out of 5 stars, ${book.reviews.toLocaleString()} reviews` : "No ratings yet"}">
+              ${getStarMarkup(book.rating)}
+              <span class="rating-value">${book.reviews ? book.rating.toFixed(1) : "New"}</span>
+              <span class="review-count">${book.reviews ? `(${book.reviews.toLocaleString()} reviews)` : "(no reviews)"}</span>
+            </div>
             <button class="button button-primary details-button" type="button" data-book-id="${escapeHtml(book.id)}">
               View Details
             </button>
@@ -137,7 +143,7 @@ function renderBooks() {
 
   emptyState.hidden = visibleBooks.length > 0
   bookGrid.hidden = visibleBooks.length === 0
-  clearFilterButton.hidden = !activeCategory && !searchInput.value
+  clearFilterButton.hidden = !activeCategory && !searchInput.value.trim()
 }
 
 function openModal(backdrop) {
@@ -194,6 +200,10 @@ document.querySelector("#open-add-book").addEventListener("click", () => {
 })
 
 searchInput.addEventListener("input", renderBooks)
+categoryFilter.addEventListener("change", () => {
+  activeCategory = categoryFilter.value
+  renderBooks()
+})
 
 bookGrid.addEventListener("click", (event) => {
   const detailsButton = event.target.closest("[data-book-id]")
@@ -205,12 +215,14 @@ bookGrid.addEventListener("click", (event) => {
       activeCategory === categoryButton.dataset.category
         ? ""
         : categoryButton.dataset.category
+    categoryFilter.value = activeCategory
     renderBooks()
   }
 })
 
 clearFilterButton.addEventListener("click", () => {
   activeCategory = ""
+  categoryFilter.value = ""
   searchInput.value = ""
   renderBooks()
 })
@@ -244,6 +256,7 @@ addBookForm.addEventListener("submit", (event) => {
   })
 
   activeCategory = ""
+  categoryFilter.value = ""
   searchInput.value = ""
   renderBooks()
   closeModal(addBookBackdrop)
