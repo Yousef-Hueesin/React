@@ -6,6 +6,9 @@ on:
       - main
     paths:
       - 'bookhub/**'
+      - 'index.html'
+      - 'script.js'
+      - 'style.css'
       - '.github/workflows/deploy-bookhub.yml'
   workflow_dispatch:
 

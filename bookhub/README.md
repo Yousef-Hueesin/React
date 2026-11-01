@@ -10,11 +10,11 @@ BookHub is a responsive book-library website built with HTML, CSS, and vanilla J
 - An add-book modal with required-field validation.
 - An empty-results message when no books match the current filters.
 
-The featured collection includes *Clean Code*, *Atomic Habits*, *The Martian*, *Dune*, and *The 5 AM Club*. Books added through the form are kept in page memory and are cleared when the page is reloaded.
+The featured collection includes *Clean Code*, *Atomic Habits*, *The Martian*, *Dune*, and *The 5 AM Club*. Books added through the form are kept in page memory and are cleared when the page is reloaded. The page source files (`index.html`, `script.js`, and `style.css`) are in the repository root.
 
 ## Publish with GitHub Pages
 
-The GitHub Actions workflow builds and deploys this site when changes to `bookhub/` are pushed to `main`. The expected site address is:
+The GitHub Actions workflow builds and deploys this site when the page source files or app configuration change on `main`. The expected site address is:
 
 <https://codding-school-mahama-1.github.io/React-First-Project-BookHub/>
 
@@ -36,11 +36,11 @@ Other useful commands, run from `bookhub/`:
 | --- | --- |
 | `npm run build` | Create the production site in `dist/` |
 | `npm run preview` | Preview the production build |
-| `npm run lint` | Check the JavaScript with ESLint |
+| `npm run lint` | Check the root `script.js` with ESLint |
 
 ## Project files
 
-- `index.html` — accessible page structure, navigation, book list, and modal dialogs.
-- `style.css` — responsive layout, visual styling, and reduced-motion support.
-- `script.js` — book data, rendering, search, category filtering, ratings, and modal interactions.
+- `../index.html` — accessible page structure, navigation, book list, and modal dialogs.
+- `../style.css` — responsive layout, visual styling, and reduced-motion support.
+- `../script.js` — book data, rendering, search, category filtering, ratings, and modal interactions.
 - `public/images/` — book cover images served by Vite.
